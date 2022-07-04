@@ -15,10 +15,6 @@ class Controller extends CController
     const nameController2 = "site";
     const nameController3 = "event";
 
-    const LANGUAGE_1 = 'vn';
-    const LANGUAGE_2 = 'en_us';
-    const LANGUAGE_3 = 'fr';
-
 //    const ARRAY_DOMAIN_1 = [
 //        self::DOMAIN_1,
 //        self::DOMAIN_1 . 'index/',
@@ -57,30 +53,56 @@ class Controller extends CController
      */
     public $breadcrumbs=array();
 
-//    public function createUrl($route,$params=array(),$ampersand='&'){
-//
-//        $route = Yii::app()->getLanguage().'/'.$route;
-//        return parent::createUrl($route, $params, $ampersand);
-//    }
+    /*
+         * On every Controller instance set language from get if is index page get main language
+         */
+    public function init(){
+
+        if($_SERVER['SERVER_NAME'] == Controller::URL_1){
+            $_GET['lang'] = 'en';
+        }else if($_SERVER['SERVER_NAME'] == Controller::URL_2){
+            $_GET['lang'] = 'hr';
+        }else if($_SERVER['SERVER_NAME'] == Controller::URL_3){
+            $_GET['lang'] = 'fr';
+        }
+        if(isset($_GET['lang']))
+            Yii::app()->setLanguage($_GET['lang']);
+        else
+            Yii::app()->setLanguage(Lang::getdefaultLanguage());
+        parent::init();
+    }
+
+    /*
+      * ProcesUrl method used for resolving languages if dont have get language
+      * System gets default language defined from database
+      */
+    public static function processUrl(){
+        if(isset($_GET['lang'])){
+            return Lang::findByCode(Yii::app()->language,  Yii::app()->controller->route);
+        }else{
+            return Lang::findByCode(Lang::getdefaultLanguage(),  Yii::app()->controller->route);
+        }
+    }
+
+    /*
+    * Aftereach action processUrl
+    */
+    protected function beforeAction($action) {
+        self::processUrl();
+        return parent::beforeAction($action);
+    }
+
+    public function createUrl($route, $params = array(), $ampersand = '&') {
+        //because if you wont to define language manually
+        if(empty($params['lang'])){
+            $params['lang'] = Controller::processUrl();
+        }
+        return parent::createUrl($route, $params, $ampersand);
+    }
 
     public function checkDomain($controller)
     {
         $hostname = $_SERVER['SERVER_NAME'];
-        $language = Yii::app()->urlManager->rules;
-//        echo "<pre>";
-//        print_r($language);
-//        echo "</pre>";
-//        die;
-//        if (in_array($hostname,Controller::ARRAY_DOMAIN_1)) {
-//            echo "1";
-//        }elseif(in_array($hostname,Controller::ARRAY_DOMAIN_2)){
-//            echo "2";
-//        }elseif(in_array($hostname,Controller::ARRAY_DOMAIN_3)){
-//            echo "3";
-//        }else{
-//            throw new CHttpException(404, 'Page not found');
-//        }
-//        die;
         if($controller == Controller::nameController1 && $hostname == Controller::URL_1){ // home
             echo "home";
         }elseif($controller == Controller::nameController2 && $hostname == Controller::URL_2){ // site

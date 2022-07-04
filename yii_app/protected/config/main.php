@@ -52,6 +52,11 @@ return array(
 
                 'http://yii-site.com/' => '/site/index',
 
+                '/'=>'site/index',
+                '<lang>/<controller:\w+>'=>'<controller>/index',
+                '<lang>/<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+                '<lang>'=>'/',
+
 //                '<lang:\w+>'=>'<controller>',
 //
 //                '<lang:\w+><controller:\w+>/<action:\w+>'=>'<controller>/<action>',
