@@ -64,6 +64,8 @@ class Controller extends CController
             $_GET['lang'] = 'hr';
         }else if($_SERVER['SERVER_NAME'] == Controller::URL_3){
             $_GET['lang'] = 'fr';
+        }else{
+            $_GET['lang'] = 'vn';
         }
         if(isset($_GET['lang']))
             Yii::app()->setLanguage($_GET['lang']);

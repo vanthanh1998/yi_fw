@@ -12,14 +12,6 @@ class Lang extends CActiveRecord{
         return "languages";
     }
 
-    /*
-     * Function For check lang by get request eq /hr/site/index
-     * If language is by get request found in database and active langage will return current link eg /hr/site/active if your request is eg /fr/site/index
-     * in this case will return /en/site/index while fr langage is not in database
-     * @param cod varchar 2
-     * @param route current action route
-     * @param redirection default to true to redirect from eg /fr/ to /en/ while fr dont exists as language
-     */
     public static function findByCode($cod,$route,$redirect = true){
         $cod = substr($cod,0,2);
 
