@@ -44,12 +44,21 @@ return array(
             'rules'=>array(
 
                 'http://yii-home.com/' => '/home/index',
-                'http://yii-home.com/hello/' => '/home/hello',
 
-                'http://yii-event.com/' => 'event/index',
-                'http://yii-event.com/create/' => 'event/create',
+                'http://yii-event.com/' => '/event/index',
+                'http://yii-event.com/create/' => '/event/create',
+
+                'http://yii-post.com/' => '/post/index',
 
                 'http://yii-site.com/' => '/site/index',
+
+//                '<lang:\w+>'=>'<controller>',
+//
+//                '<lang:\w+><controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+//
+//                '<lang:\w+><controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+
+
 
             ),
 //			'rules'=>array(

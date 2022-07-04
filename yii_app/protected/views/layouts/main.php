@@ -35,9 +35,9 @@
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-                array('label'=>'Home', 'url'=>Controller::URL1),
-                array('label'=>'Event', 'url'=>Controller::URL2),
-                array('label'=>'Site', 'url'=>Controller::URL3),
+                array('label'=>'Home', 'url'=>array('/home/index')),
+                array('label'=>'Site', 'url'=>array('/site/index')),
+                array('label'=>'Event', 'url'=>array('/event/index')),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),

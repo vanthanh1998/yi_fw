@@ -21,6 +21,12 @@ class SiteController extends Controller
 		);
 	}
 
+    public function __construct($id, $module = null)
+    {
+        parent::__construct($id, $module);
+        $this->checkDomain($id);
+    }
+
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.

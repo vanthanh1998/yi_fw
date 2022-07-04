@@ -11,20 +11,11 @@ class HomeController extends Controller
     {
         parent::__construct($id, $module);
         $this->checkDomain($id);
-
     }
 
     public function actionIndex()
     {
-        $data = [
-            ["id" => 1, "name" => 'Tom',]
-        ];
-        $this->render('index', ['data' => $data]);
-
+        $this->render('index');
     }
 
-    public function actionHello()
-    {
-        return "hello thanhrain";
-    }
 }

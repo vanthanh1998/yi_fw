@@ -8,6 +8,12 @@ class EventController extends Controller
 	 */
 	public $layout='//layouts/column2';
 
+    public function __construct($id, $module = null)
+    {
+        parent::__construct($id, $module);
+        $this->checkDomain($id);
+    }
+
 	/**
 	 * @return array action filters
 	 */
